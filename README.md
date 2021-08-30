@@ -11,8 +11,8 @@ docker compose up<br/>
 ## **APIs:**
 
 ### **Vehicle:**<br/>
-Send a **GET** request on vehicle/ to retrieve a list
-of assets <br/>
+Send a **GET** request on vehicle/ to retrieve the list
+of assets. <br/>
 Send a **PUT** request on vehicle/<:unit#> with mileage 
 property to update the mileage.<br/>
 
