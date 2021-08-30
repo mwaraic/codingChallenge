@@ -21,12 +21,8 @@ def miles(n):
             a[i, j] += step
             r -= step
 
-
-
  mileage_list=flatten(a.tolist())
  return mileage_list
-
-
 
 def daterange(date1, date2):
     for n in range(int ((date2 - date1).days)+1):

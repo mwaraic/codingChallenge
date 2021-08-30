@@ -12,7 +12,7 @@ class Vehicle(models.Model):
     manufacturer=CharField(max_length=100)
     status=CharField(max_length=100)
 
-class Day_Mileage(models.Model):
+class Daily_Mileage(models.Model):
     unit=ForeignKey(Vehicle, models.DO_NOTHING, db_column='unit')
     mileage=PositiveIntegerField()
     date=DateField()

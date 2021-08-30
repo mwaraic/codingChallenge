@@ -1,5 +1,5 @@
 from rest_framework.views import APIView
-from .models import Vehicle, Day_Mileage
+from .models import Vehicle, Daily_Mileage
 from .serializers import VehicleSerializer, VehicleGetSerializer
 from rest_framework import viewsets, status
 from rest_framework.permissions import AllowAny
@@ -21,12 +21,12 @@ class VehicleViewSet(viewsets.ModelViewSet):
            
            try:
                
-              Day_Mileage.objects.get(unit=Vehicle.objects.get(unit=pk), date=datetime.today().strftime('%Y-%m-%d'))
+              Daily_Mileage.objects.get(unit=Vehicle.objects.get(unit=pk), date=datetime.today().strftime('%Y-%m-%d'))
               return Response(status=status.HTTP_400_BAD_REQUEST)
           
            except:
                
-              Day_Mileage.objects.create(unit=Vehicle.objects.get(unit=pk), mileage=int(mileage), date=datetime.today().strftime('%Y-%m-%d'))     
+              Daily_Mileage.objects.create(unit=Vehicle.objects.get(unit=pk), mileage=int(mileage), date=datetime.today().strftime('%Y-%m-%d'))     
               Vehicle.objects.filter(unit=pk).update(mileage=Vehicle.objects.get(unit=pk).mileage+int(mileage))
               return Response(status=status.HTTP_201_CREATED)  
             
@@ -39,28 +39,32 @@ class VehicleListViewSet(viewsets.ModelViewSet):
     permission_classes= [AllowAny]
     queryset=Vehicle.objects.all()
     
-    
-    """
-    for i, j in zip(dates(), miles(53424)):
-        Day_Mileage.objects.create(unit=Vehicle.objects.get(unit="S7J2A6G3"), date=i, mileage=j)
+    """ 
+    for i, j in zip(dates(), miles(35459)):
+        Daily_Mileage.objects.create(unit=Vehicle.objects.get(unit="F1AEJ13A"), date=i, mileage=j)
     
     """ 
 
 class Distance(APIView):
     
     def post(self, request,pk):
+        
         try:
+            
          date = datetime.strptime(json.loads(json.dumps(request.data))['date'], '%Y-%m-%d')
          curr_date=datetime.today()
          total_days=(curr_date-date).days
-         queryset=Day_Mileage.objects.filter(unit=pk).order_by('-date')[:total_days]
+         
+         queryset=Daily_Mileage.objects.filter(unit=pk).order_by('-date')[:total_days]
+         
          total=[]
-         print(total_days)
          for i in queryset:
             total.append(i.mileage)
+            
          return Response({"distance":sum(total)})
          
         except:
-            return Response(status.HTTP_400_BAD_REQUEST)    
+            
+         return Response(status.HTTP_400_BAD_REQUEST)    
 
     
