@@ -87,15 +87,29 @@ class Distance(APIView):
     
 # try except block is set in place to check whether particular date to calculate distance from exists and have right syntax 
        
-        try:
+     try:
             
          date = datetime.strptime(json.loads(json.dumps(request.data))['date'], '%Y-%m-%d')
          curr_date=datetime.today()
-         
-# finding total number of days from the given date to current date         
-         
-         total_days=(curr_date-date).days
+# finding total number of days from the given date to current date          
 
+         total_days=(curr_date-date).days
+         
+# future date provided 
+         if(total_days==-1):
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+         
+# case where today's mileage is required 
+         if(total_days==0):
+
+# try except block to check whether mileage was reported today otherwise send 0 distance
+
+             try:
+                 mileage=Daily_Mileage.objects.get(unit=pk, date=date)
+                 return Response({"distance": mileage })
+             except:
+                 return Response({"distance": 0})
+        
 # getting all entries in the daily_mileage table by reverse order of date for the asset (upto days required)
          
          queryset=Daily_Mileage.objects.filter(unit=pk).order_by('-date')[:total_days]
@@ -108,8 +122,8 @@ class Distance(APIView):
             
          return Response({"distance":sum(total)})
          
-        except:
+     except:
             
-         return Response(status.HTTP_400_BAD_REQUEST)    
+         return Response(status=status.HTTP_400_BAD_REQUEST)    
 
     
