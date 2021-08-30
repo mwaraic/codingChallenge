@@ -6,6 +6,7 @@
 period (stored in **Daily_Mileage** table)
 - All random values in **Daily_Mileage** table for an asset sums to mileage in **Vehicle** table
 - Whenver mileage is updated in **Vehicle** table for an asset, a concurrent entry is made in **Daily_Mileage** table
+- Mileage could only be updated once in a day
 - An asset has become inoperative since 2021-08-29 and updating mileage for it would result in exception
 
 
@@ -49,3 +50,10 @@ property to calculate distance. <br/>
 
 }
 
+#### Example Of Response:</br>
+
+{
+
+"distance": +int
+
+}
