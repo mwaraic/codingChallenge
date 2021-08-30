@@ -10,13 +10,13 @@ docker compose up<br/>
 
 ## **APIs:**
 
-### **Vehicle**<br/>
+### **Vehicle:**<br/>
 Send a **GET** request on vehicle/ to retrieve a list
 of assets <br/>
 Send a **PUT** request on vehicle/<:unit#> with mileage 
 property to update the mileage.<br/>
 
-### **Distance**<br/>
+### **Distance:**<br/>
 Send a **POST** request on distance/<:unit#> with date 
 property to calculate distance. <br/>
 
