@@ -1,7 +1,7 @@
 # Coding Challenge Sky IT Services Ltd.
 
 ## **Assumptions:** 
-- Each asset has been on the road since 5 years (2016-09-01 and onwards)
+- Each asset has been on the road since 5 years (2016-08-31 and onwards)
 - A random value has been assigned to mileage for each day within this 
 period (stored in **Daily_Mileage** table)
 - All random values in **Daily_Mileage** table for an asset sums to mileage in **Vehicle** table
